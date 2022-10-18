@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-atroposs-sample-module',
+  selector: 'atroposs-sample-module',
   template: `
     <p>
       atroposs-sample-module works!
