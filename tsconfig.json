@@ -2,6 +2,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "atroposs-sample-module": [
+        "dist/atroposs-sample-module/atroposs-sample-module",
+        "dist/atroposs-sample-module"
+      ]
+    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

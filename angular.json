@@ -3,5 +3,37 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "atroposs-sample-module": {
+      "projectType": "library",
+      "root": "projects/atroposs-sample-module",
+      "sourceRoot": "projects/atroposs-sample-module/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/atroposs-sample-module/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/atroposs-sample-module/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/atroposs-sample-module/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/atroposs-sample-module/src/test.ts",
+            "tsConfig": "projects/atroposs-sample-module/tsconfig.spec.json",
+            "karmaConfig": "projects/atroposs-sample-module/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "atroposs-sample-module"
 }
