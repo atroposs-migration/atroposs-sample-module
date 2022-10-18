@@ -59,7 +59,12 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/test-sample-module/src/favicon.ico",
-              "projects/test-sample-module/src/assets"
+              "projects/test-sample-module/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./projects/atroposs-sample-module/assets",
+                "output": "/spm-assets/"
+                }
             ],
             "styles": [
               "projects/test-sample-module/src/styles.scss"
