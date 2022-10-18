@@ -174,4 +174,4 @@ Within this project we will create our library and our test-application.
 ## _Extensions_
 
 - ~~[Webworker](#extensions)~~
-- [Python webassembly](#extensions)
+- [Python webassembly](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/webassemblys/Python_wasm.md)

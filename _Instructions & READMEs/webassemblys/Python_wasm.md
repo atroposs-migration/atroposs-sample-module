@@ -10,7 +10,7 @@ This instructions explain how you can setup an angular project for Atroposs, whi
 
 ## General
 
-### 📌 `Info: These steps are a extension to the [main instructions](). Please do them first.`
+### 📌 `Info: These steps are a extension to the `[main instructions](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/how-to-build-atroposs-module.md)`. Please do them first.`
 
 <br>
 
@@ -285,4 +285,4 @@ This instructions explain how you can setup an angular project for Atroposs, whi
 <br>
 <br>
 
-### _This module is a extension of [this]() instructions_
+### _This module is a extension of [this](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/how-to-build-atroposs-module.md) instructions_
