@@ -280,7 +280,7 @@ This instructions explain how you can setup an angular project for Atroposs, whi
 
 ## Integrate library in Atroposs application
 
-- For now ask [Lars Boß](https://github.com/LersCode) to do that. You can write him via mail or MS Teams at `lars.boss@prodyna.com`
+- For now ask [LersCode](https://github.com/LersCode) to do that. You can write him via [mail](mailto:lars.boss@prodyna.com).
 
 <br>
 <br>
