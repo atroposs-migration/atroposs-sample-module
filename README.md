@@ -68,6 +68,27 @@ Open your project-folder in your IDE.
 - Open your project again in your IDE.
 - Navigate to `projects/atroposs-yourName-module/src/lib/` and replace any leftover names containing `sample` with `yourName`.
 
+- Replace the `shorthandle` in `output` of `assets` in your `angular.json`:
+  > Note: `shorthandle` stands for a short variant of `yourName`. This shorthandle will later be used to adress assets in your library.
+  ```
+  {
+  "glob": "**/*",
+  "input": "./projects/atroposs-yourName-module/assets",
+  "output": "/shorthandle-assets/"
+  }
+  ```
+  - Eg. afterwards it could look like this:
+    ```
+    "assets": [
+        "projects/wasm-application/src/favicon.ico",
+        "projects/wasm-application/src/assets",
+        {
+        "glob": "**/*",
+        "input": "./projects/atroposs-xml-module/assets",
+        "output": "/xml-assets/"
+        }
+    ```
+
 - Commit all changes made to the branch. (eg. `git commit -m "renamed module"`) (mandatory)
 
 <br>
