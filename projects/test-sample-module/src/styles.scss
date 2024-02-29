@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+/* Add application styles & imports to this file! */
+
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import './atroposs-theme.scss';
+
+body {
+  font-family: 'Roboto Condensed';
+  color: var(--primary-color);
+}
