@@ -1,0 +1,60 @@
+/*
+ * Material Font
+ */
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../../assets/fonts/material-icons.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -moz-font-feature-settings: 'liga';
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+ * Roboto Condesed
+ */
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url(../../assets/fonts/Roboto-Condensed/RobotoCondensed-Regular.ttf)
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url(../../assets/fonts/Roboto-Condensed/RobotoCondensed-Bold.ttf)
+    format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url(../../assets/fonts/Roboto-Condensed/RobotoCondensed-Italic.ttf)
+    format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto Condensed';
+  src: url(../../assets/fonts/Roboto-Condensed/RobotoCondensed-BoldItalic.ttf)
+    format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
