@@ -1,0 +1,35 @@
+#material-theme-test {
+  // Buttons
+  section {
+    display: table;
+    margin: 16px 0;
+  }
+
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+
+  .example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+
+  .example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 16px 0;
+  }
+
+  .example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+}
