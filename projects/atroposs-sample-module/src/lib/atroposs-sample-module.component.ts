@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
     <p>
       atroposs-sample-module works!
     </p>
+    <button mat-raised-button color="accent">Submit!</button>
   `,
   styles: [
   ]

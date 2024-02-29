@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AtropossSampleModuleComponent } from 'projects/atroposs-sample-module/src/public-api';
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
 
 const routes: Routes = [
-  {path: '', component: AtropossSampleModuleComponent}
-];
+  { path: '', redirectTo: 'spm-module', pathMatch: 'full' },
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
