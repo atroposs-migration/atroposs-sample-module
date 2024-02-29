@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { AtropossSampleModuleComponent } from '../atroposs-sample-module.component'
+import { TestThemeMaterialComponent } from '../components/test-theme-material/test-theme-material.component'
 
 const lib_routes: Routes = [
   {
@@ -8,7 +9,7 @@ const lib_routes: Routes = [
     children: [
       {
         path: '',
-        component: AtropossSampleModuleComponent,
+        component: TestThemeMaterialComponent,
       },
     ],
   },
