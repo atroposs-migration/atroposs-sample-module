@@ -4,16 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "npm run build-lib",
+    "publish": "npm run publish-atroposs-module",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build-lib": "ng build atroposs-sample-module",
-    "build-app": "ng build test-sample-module",
     "pack-lib": "cd dist/atroposs-sample-module/ && npm pack && cd ../..",
-    "pack-app": "cd dist/test-sample-module/ && npm pack && cd ../..",
     "publish-lib": "cd dist/atroposs-sample-module/ && npm publish && cd ../..",
-    "publish-app": "cd dist/test-sample-module/ && npm publish && cd ../..",
-    "pack-atroposs-module": "npm run build-lib && npm run pack-lib",
     "publish-atroposs-module": "npm run build-lib && npm run pack-lib && npm publish-lib"
   },
   "private": true,
