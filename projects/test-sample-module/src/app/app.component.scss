@@ -16,7 +16,10 @@
       #e5e5f7 25px
     );
     color: #000;
-    font-size: 2rem;
+    & > * {
+      margin: 1rem;
+      background-color: #fff;
+    }
   }
 
   .right {
