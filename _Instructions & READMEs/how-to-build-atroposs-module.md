@@ -1,7 +1,8 @@
-# How to create an Atroposs module 
+# How to create an Atroposs module
 
-This instructions explain how you can setup an angular module project for Atroposs. 
+This instructions explain how you can setup an angular module project for Atroposs from scratch.
 <br>
+
 - [Generate project](#▶-generate-project)
 - [Generate library](#▶-generate-library)
 - [Generate test application](#▶-generate-test-application)
@@ -10,9 +11,9 @@ This instructions explain how you can setup an angular module project for Atropo
 - [Pack & Publish your library](#▶-pack--publish-your-library)
 - [Integrate library in Atroposs application](#integrate-library-in-atroposs-application) (or any other application you want to, but instructions don't cover individual integrations ;)
 - [Extensions](#extensions)
-<br>
-This step-by-step manual guides you through the steps, to build a Atroposs-module (Angular-library).
-The module can be published to [npmjs.org](npmjs.org) and then be imported into Angular applications.
+  <br>
+  This step-by-step manual guides you through the steps, to build a Atroposs-module (Angular-library).
+  The module can be published to [npmjs.org](npmjs.org) and then be imported into Angular applications.
 
 > Note: If you want to publish to npmjs.org you need an account (it's free :)
 
@@ -28,20 +29,24 @@ The module can be published to [npmjs.org](npmjs.org) and then be imported into 
 
 <br><br>
 
-## 🔠 Naming guidelines 
+## 🔠 Naming guidelines
+
 <br>
 
 ### 1️⃣ Project
+
 We recommend to name your project the same as the library. This way your git-repo will have the same name as the npm-package.
 
 <br>
 
 ### 2️⃣ Library
+
 Please name your library as follows `atroposs-yourLibraryName`. The name of the library is later the name of the npm-package.
 
 <br>
 
 ### 3️⃣ test-Application
+
 We recommmend to name your application as follows `test-yourLibraryName`.
 
 > Note: In this How-To, we use `yourLibraryname` as synonym for the name of the library. You have to replace it with your own name for your module.
@@ -56,9 +61,9 @@ We recommmend to name your application as follows `test-yourLibraryName`.
 
 > Info: Please consider the naming-guidlines mentioned above, when you are creating an module/library for Atroposs.
 
-- Open a Terminal and navigate in your projectfolder. 
-Execute `ng new project_name --no-create-application` to generate an empty angular project. 
-Within this project we will create our library and our test-application.
+- Open a Terminal and navigate in your projectfolder.
+  Execute `ng new project_name --no-create-application` to generate an empty angular project.
+  Within this project we will create our library and our test-application.
 
 - After creating the project open the projectfolder in your IDE
 
@@ -73,9 +78,10 @@ Within this project we will create our library and our test-application.
 - If you want to use assets (images, fonts, etc.) in your module, than create the folder `assets` under `projects/atroposs-yourLibraryName/`.
 
   Add the following code to `projects/atroposs-yourLibraryName/ng-package.json`:
-  ``` 
-  "assets": ["./assets/"], 
-  ``` 
+
+  ```
+  "assets": ["./assets/"],
+  ```
 
 - Navigate to `projects/atroposs-yourLibraryName/src/lib/atroposs-yourLibraryName.component.ts` and delete `lib-` from `selector`.
 
@@ -88,18 +94,18 @@ Within this project we will create our library and our test-application.
 > Info: Please consider the naming-guidlines mentioned above, when you are creating an test-application for your Atroposs library.
 
 - Execute `ng generate application test-yourLibraryName` in your angular project to generate the application.
+
   > Note: `Angular routing = yes` and `Stylesheets = scss`.
 
-- Navigate to `projects/test-yourLibraryName/src/app/app.component.html` and delete everything except for `<router-outlet></router-outlet>` and add `<atroposs-yourLibraryName></atroposs-yourLibraryName>`. 
-<br/>It should look like this:
-    ```
-    <atroposs-yourLibraryName></atroposs-yourLibraryName>
-    <router-outlet></router-outlet>
-    ```
+- Navigate to `projects/test-yourLibraryName/src/app/app.component.html` and delete everything except for `<router-outlet></router-outlet>` and add `<atroposs-yourLibraryName></atroposs-yourLibraryName>`.
+  <br/>It should look like this:
+  `   <atroposs-yourLibraryName></atroposs-yourLibraryName>
+  <router-outlet></router-outlet>
+`
 
-    > Note: 
-    <br/>As an alternative you could add `{path: '', component: YourLibraryNameModuleComponent}` to `const routes` in `projects/test-yourLibraryName/src/app/app-routing.module.ts`.
-    <br/>Then you would not need to add `<atroposs-yourLibraryName></atroposs-yourLibraryName>` to `projects/test-yourLibraryName/src/app/app.component.html`. Only `<router-outlet></router-outlet>` is needed then.
+      > Note:
+      <br/>As an alternative you could add `{path: '', component: YourLibraryNameModuleComponent}` to `const routes` in `projects/test-yourLibraryName/src/app/app-routing.module.ts`.
+      <br/>Then you would not need to add `<atroposs-yourLibraryName></atroposs-yourLibraryName>` to `projects/test-yourLibraryName/src/app/app.component.html`. Only `<router-outlet></router-outlet>` is needed then.
 
 - Add the following code to `assets` in your `angular.json`:
   > Note: `shorthandle` stands for a short variant of `yourLibraryName`.
@@ -127,6 +133,7 @@ Within this project we will create our library and our test-application.
 ## ▶ Adding npm scripts
 
 - Add the following code to `scripts` in your `package.json`:
+
 ```
 "build-lib": "ng build atroposs-yourLibraryName",
 "build-app": "ng build test-yourLibraryName",
@@ -156,7 +163,7 @@ Within this project we will create our library and our test-application.
   1. `npm build`
   2. `cd dist/yourLibraryName/`
   3. `npm pack`
-    > Note: You can skip the next step if you just want to pack your module
+     > Note: You can skip the next step if you just want to pack your module
   4. `npm publish`
   5. `cd ../..`
 
