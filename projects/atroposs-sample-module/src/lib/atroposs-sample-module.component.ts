@@ -1,21 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'atroposs-sample-module',
   template: `
-    <p>
-      atroposs-sample-module works!
-    </p>
-    <button mat-raised-button color="accent">Submit!</button>
+    <p>atroposs-sample-module works!</p>
+    <button mat-raised-button color="accent" routerLink="test-material">
+      Test Material
+    </button>
   `,
-  styles: [
-  ]
+  styles: [],
 })
 export class AtropossSampleModuleComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
