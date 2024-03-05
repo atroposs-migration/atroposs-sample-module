@@ -134,6 +134,8 @@ Open your project-folder in your IDE.
   - A white background
   - The sentence `atroposs-yourName-module works!` in the top-left corner
 
+> Note: When you start the module, you can see a sidebar on the left side. This sidebar is just to show how your module will be shown in the main application. You can delete it if you want.
+
 <br>
 
 ## 🎉🎉 DONE 🎉🎉
