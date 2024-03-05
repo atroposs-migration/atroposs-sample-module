@@ -1,0 +1,28 @@
+#root-wrapper {
+  display: flex;
+  min-height: 100vh;
+  height: auto;
+
+  .left {
+    width: var(--sidebar-width);
+    height: auto;
+    background-color: #e5e5f7;
+    opacity: 0.8;
+    background: repeating-linear-gradient(
+      45deg,
+      #444cf7,
+      #444cf7 5px,
+      #e5e5f7 5px,
+      #e5e5f7 25px
+    );
+    color: #000;
+    font-size: 2rem;
+  }
+
+  .right {
+    flex: 1;
+    height: auto;
+    position: relative;
+    padding: 0 var(--main-container-padding);
+  }
+}
