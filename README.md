@@ -26,7 +26,7 @@ This repository consists of a template for a standard atroposs-module. It also h
 
 <br>
 
-### Have a look at the naming guidelines in [here](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/how-to-build-atroposs-module.md), just so you know about them.
+### Have a look at the [naming guidelines](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/naming-guidelines.md), just so you know about them.
 
 <br>
 
