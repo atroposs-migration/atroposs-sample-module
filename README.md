@@ -4,6 +4,22 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 <br>
 
+## Table of Contents
+
+- [General](#general)
+- [Use template](#use-template)
+- [Setup your atroposs-module](#setup-your-atroposs-module)
+  - [1️⃣ Clone](#1️⃣-clone)
+  - [2️⃣ Rename project folders/files](#2️⃣-rename-project-foldersfiles)
+  - [3️⃣ Install Packages](#3️⃣-install-packages)
+  - [4️⃣ Squash git-logs (very recommended)](#4️⃣-squash-git-logs-very-recommended)
+  - [5️⃣ Serve module](#5️⃣-serve-module)
+- [Further instructions](#further-instructions)
+  - [Angular Material](#angular-material)
+  - [Routing](#routing)
+  - [Module header](#module-header)
+- [Further help](#further-help)
+
 ## General
 
 This repository consists of a template for a standard atroposs-module. It also holds instruction-files for better understanding how to setup such a module or how to extend the module.
@@ -21,6 +37,8 @@ If you want to use this template for your module, please follow these steps care
 Thank you :)
 
 <br>
+
+# Setup your atroposs-module
 
 ## 1️⃣ Clone
 
@@ -150,16 +168,24 @@ Open your project-folder in your IDE.
 ## Angular Material
 
 We use Angualar material in our Atroposs project. It is already initialised in this module, so you don't have to do so. <br>
-When you want to use a Material Component in your module, you can add it to the `material.module.ts` in the `atroposs-yourName-module/src/lib/modules`-folder. <br>
+When you want to use a Material Component in your module, you can add the import to the `material.module.ts` in the `atroposs-yourName-module/src/lib/modules`-folder. <br>
 
 > Info: The already existing component `test-theme-material` is just a test-component to show how to use Angular Material in your module. You can delete it.
 
 ## Routing
 
 When you want to use your own routing in your module, you can add it to the `lib-routing.module.ts` in the `atroposs-yourName-module/src/lib/modules`-folder. <br>
-We will just add the root-route of your module in teh main application, from then on, your routing will be executed. <br>
+We added an example there, so you can see how to do it. <br>
+The most important thing to kno is, that all your routes need to include outlet `lib-outlet`. This is, so that we can show the individual header for your module with the version & name of your module, plus your logo. <br>
+We will just add the root-route of your module in the main application, from then on, your routing will be executed. <br>
 
-> Note: Please populate your root-routing in the README.md of your module, so we know how to call your module.
+> Note: Please populate your root-routing in the README.md of your module, so we know how to call your module. (eg: `spm-module`)
+
+## Module header
+
+We recommmend to use the header, we provide, so that the atroposs modules are streamlined and look the same. <br>
+You can find the header in the `atroposs-yourName-module/src/lib/atroposs-yourName-module.component.ts`-file. <br>
+Your can add one or more logos, display the name and maybe an icon of the module. <br>
 
 <br>
 <br>

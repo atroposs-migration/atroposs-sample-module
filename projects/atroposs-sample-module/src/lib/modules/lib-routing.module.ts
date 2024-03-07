@@ -6,14 +6,12 @@ import { TestThemeMaterialComponent } from '../components/test-theme-material/te
 const lib_routes: Routes = [
   {
     path: 'spm-module', // root-routing path
+    component: AtropossSampleModuleComponent, // root-routing component
     children: [
       {
         path: '',
-        component: AtropossSampleModuleComponent,
-      },
-      {
-        path: 'test-material',
         component: TestThemeMaterialComponent,
+        outlet: 'lib-outlet',
       },
     ],
   },
