@@ -1,5 +1,7 @@
 # How to create an Atroposs module
 
+> # Note: This is deprecated starting January 2024. Please use the main [README.md](https://github.com/PRODYNA/atroposs-sample-module/blob/main/README.md) and use the described steps there.
+
 This instructions explain how you can setup an angular module project for Atroposs from scratch.
 <br>
 
@@ -99,13 +101,12 @@ We recommmend to name your application as follows `test-yourLibraryName`.
 
 - Navigate to `projects/test-yourLibraryName/src/app/app.component.html` and delete everything except for `<router-outlet></router-outlet>` and add `<atroposs-yourLibraryName></atroposs-yourLibraryName>`.
   <br/>It should look like this:
-  `   <atroposs-yourLibraryName></atroposs-yourLibraryName>
-  <router-outlet></router-outlet>
-`
+  `  <atroposs-yourLibraryName></atroposs-yourLibraryName>
+<router-outlet></router-outlet>`
 
-      > Note:
-      <br/>As an alternative you could add `{path: '', component: YourLibraryNameModuleComponent}` to `const routes` in `projects/test-yourLibraryName/src/app/app-routing.module.ts`.
-      <br/>Then you would not need to add `<atroposs-yourLibraryName></atroposs-yourLibraryName>` to `projects/test-yourLibraryName/src/app/app.component.html`. Only `<router-outlet></router-outlet>` is needed then.
+            > Note:
+            <br/>As an alternative you could add `{path: '', component: YourLibraryNameModuleComponent}` to `const routes` in `projects/test-yourLibraryName/src/app/app-routing.module.ts`.
+            <br/>Then you would not need to add `<atroposs-yourLibraryName></atroposs-yourLibraryName>` to `projects/test-yourLibraryName/src/app/app.component.html`. Only `<router-outlet></router-outlet>` is needed then.
 
 - Add the following code to `assets` in your `angular.json`:
   > Note: `shorthandle` stands for a short variant of `yourLibraryName`.
