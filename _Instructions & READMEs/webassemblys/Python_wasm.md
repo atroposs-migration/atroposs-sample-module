@@ -31,9 +31,9 @@ It's recommended to use a webworker to run the python code. This way the main th
   ```typescript
   /// <reference lib="webworker" />
 
-  const PYODIDE_URL: string = 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js'
-
   addEventListener('message', async ({ data }) => {
+    const PYODIDE_URL: string = 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js'
+
     importScripts(PYODIDE_URL)
 
     async function loadPyodideAndPackages() {
@@ -182,14 +182,14 @@ It's recommended to use a webworker to run the python code. This way the main th
 1. Create a function, which loads the webassembly and executes it.
 
 ```typescript
-const PYODIDE_URL: string = 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js'
-
 async function loadPyodideAndPackages() {
   //@ts-ignore
   self.pyodide = await self.loadPyodide()
 }
 
 async function runWasm(data) {
+  const PYODIDE_URL: string = 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js'
+
   importScripts(PYODIDE_URL)
 
   try {
