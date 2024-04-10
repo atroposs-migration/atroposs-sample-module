@@ -1,12 +1,14 @@
 # How to Python WASM in Atroposs (Angular Library)
 
-This instructions explain how you can setup an angular project for Atroposs, which uses a python webassembly in a webworker. The instructions are split up by the following topics: 
+This instructions explain how you can setup an angular project for Atroposs, which uses a python webassembly in a webworker. The instructions are split up by the following topics:
 <br>
-- [Configure library](#configure-library)
-- [Configure test application](#configure-test-application)
+
+- [Configure and use webworker](#configure-and-use-webworker)
+- [Configure webworker file to run Python code](#configure-webworker-file-to-run-python-code)
+- [Configure webworker service](#configure-webworker-service)
 - [Dev: Test if it works :)](#dev-test-if-it-works)
 - [Integrate library in Atroposs application](#integrate-library-in-atroposs-application)
-<br>
+  <br>
 
 ## General
 
@@ -14,246 +16,138 @@ This instructions explain how you can setup an angular project for Atroposs, whi
 
 <br>
 
-## Configure library
+## Configure and use webworker
 
-- Navigate in your project to `projects/atroposs-yourLibraryname/src/lib/atroposs-yourLibraryname.service.ts`. Insert the missing code from the following template:
-  ```
-  import { Injectable } from '@angular/core';
-  /**
-  * CONSTANTS
-  */
-  const SCRIPT_PATH: string = 'assets/test.py'; // <= path to python-file
-  const SCRIPT_TYPE: string = 'python';
-  /**
-  * Service
-  */
-  @Injectable({
-    providedIn: 'root',
-  })
-  export class AtropossYourLibrarynameService {
-    // Function to start the webworker and get the results
-    private webWorkerFunction: Function | undefined;
-    constructor() {}
-    /**
-    * @name setWebworker
-    * @description sets the webWorkerFunction to a given function
-    * @param f 
-    */
-    setWebworker(f: Function) {
-      this.webWorkerFunction = f;
-    }
-    /**
-    * @name startWebworker
-    * @description starts the webworker
-    * @param data (optional) gets handled as param for python-script
-    */
-    async startWebworker(data?: Object) {
-      if (this.webWorkerFunction)
-        this.webWorkerFunction(await this.getScript(), data);
-    }
-    /**
-    * @name getWebworkerType
-    * @description returns the script-type
-    * @returns SCRIPT_TYPE
-    */
-    getWebworkerType(): string {
-      return SCRIPT_TYPE;
-    }
-    /**
-    * @name getScript
-    * @description fetches the script from assets and returns the script-code as string
-    * @returns script-code
-    */
-    private async getScript() {
-      return await fetch(SCRIPT_PATH).then((response) => {
-        return response.text();
-      });
-    }
-  }
-  ```
+It's recommended to use a webworker to run the python code. This way the main thread is not blocked and the user experience is not affected.
+[Set up a webworker](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/webworker.md)
 
 <br>
 
-## Configure test application
+## Configure webworker file to run Python code
 
-- Generate web-worker component using this command `ng g web-worker webworker --project test-yourLibraryname`. This should add the following code and files (if not create them manually)
+- Here is the [pyodide documentation](https://pyodide.org/en/stable/usage/quickstart.html)
+- Replace and add the following code to your `projects/atroposs-yourLibraryname-module/assets/webworker/webworker.worker.ts`:
 
-  > Note: If you want to give a specific name to your webworker, you can do so. Just replace `webworker` in  `ng g web-worker webworker --project test-yourLibraryname` with your specific name.
-
-  - New Files:
-    - `projects/test-yourLibraryname/src/app/webworker.worker.ts`:
-      ```
-      /// <reference lib="webworker" />
-
-      addEventListener('message', ({ data }) => {
-        const response = `worker response to ${data}`;
-        postMessage(response);
-      });
-      ```
-    - `projects/test-yourLibraryname/tsconfig.worker.json`:
-      ```
-      /* To learn more about this file see: https://angular.io/config/tsconfig. */
-      {
-        "extends": "../../tsconfig.json",
-        "compilerOptions": {
-            "outDir": "../../out-tsc/worker",
-            "lib": [
-            "es2018",
-            "webworker"
-            ],
-            "types": []
-        },
-        "include": [
-            "src/**/*.worker.ts"
-        ]
-      }
-      ```
-  - Changed Files:
-    - `projects/test-yourLibraryname/src/app/app.component.ts`: (this new code could be missing - if so, just ignore it)
-      ```
-      import { Component } from '@angular/core';
-
-      @Component({
-        selector: 'app-root',
-        templateUrl: './app.component.html',
-        styleUrls: ['./app.component.scss']
-      })
-      export class AppComponent {
-        title = 'wasm-application';
-      }
-
-      // =>
-      // THE FOLLOWING CODE IS NEW
-      // =>
-
-      if (typeof Worker !== 'undefined') {
-        // Create a new
-        const worker = new Worker(new URL('./webworker.worker', import.meta.url));
-        worker.onmessage = ({ data }) => {
-            console.log(`page got message: ${data}`);
-        };
-        worker.postMessage('hello');
-      } else {
-      // Web Workers are not supported in this environment.
-      // You should add a fallback so that your program still executes correctly.
-      }
-      ```
-- Replace and add the following code to your `projects/test-yourLibraryname/src/app/webworker.worker.ts`:
-  ```
+  ```typescript
   /// <reference lib="webworker" />
 
-  const INDEX_URL:string = 'https://cdn.jsdelivr.net/pyodide/v0.21.1/full/';
+  const PYODIDE_URL: string = 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js'
 
   addEventListener('message', async ({ data }) => {
-    importScripts(INDEX_URL +'pyodide.js');
+    importScripts(PYODIDE_URL)
+
     async function loadPyodideAndPackages() {
       //@ts-ignore
-      self.pyodide = await self.loadPyodide();
+      self.pyodide = await self.loadPyodide()
     }
 
     try {
-      await loadPyodideAndPackages();
+      await loadPyodideAndPackages()
 
-      const { python, ...context } = data;
+      const { python, ...context } = data
 
+      /**
+       * Makes key-value pairs of the received context available for this Worker's scope.
+       * This is important so that they can be imported into the Python file: `from js import [key]`
+       */
       for (const key of Object.keys(context)) {
         // @ts-ignore
-        self[key] = context[key];
+        self[key] = context[key]
       }
 
       try {
         // @ts-ignore
-        await self.pyodide.loadPackagesFromImports(python);
+        await self.pyodide.loadPackagesFromImports(python)
         // @ts-ignore
-        let results = await self.pyodide.runPythonAsync(python);
-        self.postMessage({ results });
+        let results = await self.pyodide.runPythonAsync(python)
+        self.postMessage({ type: 'SUCCESS', payload: results })
       } catch (error) {
         // @ts-ignore
-        self.postMessage({ error: error.message });
+        self.postMessage({ error: error })
       }
     } catch (e) {
       // @ts-ignore
-      self.postMessage({ error: e.message + '\n' + e.stack });
+      self.postMessage({ error: e })
     }
-  });
-  ``` 
-
-- Add a new service with `ng generate service webworker --project test-yourLibraryname`
-
-  > Note: It's better use to put all services in a service-folder. The command could look like this then `ng generate service _services/webworker/webworker --project test-yourLibraryname` -> folder '_services' holds folder 'webworker' holds service-files. Next service could be added like this `ng generate service _services/yourServiceName/yourServiceName --project test-yourLibraryname`.
-
-- Add the following code to the new created `webworker.service.ts`:
-  ```
-  run(
-      pyScript: string,
-      context: any,
-      onSuccess: (arg0: any) => any,
-      onError: any
-    ) {
-      if (typeof Worker !== 'undefined') {
-        const pyodideWorker = new Worker(
-          new URL('../../webworker.worker', import.meta.url),
-          { type: 'module' }
-        );
-        pyodideWorker.onerror = onError;
-        pyodideWorker.onmessage = (e: { data: any }) => onSuccess(e.data);
-        pyodideWorker.postMessage({
-          ...context,
-          python: pyScript,
-        });
-      }
-    }
-
-    asyncRun(script: string, context: any) {
-      return new Promise((onSuccess, onError) => {
-        this.run(script, context, onSuccess, onError);
-      });
-    }
+  })
   ```
 
-- Add&nbsp; `import { HttpClientModule } from '@angular/common/http';` &nbsp;to your&nbsp; `projects/test-yourLibraryname/src/app/app.module.ts`.
-- Add&nbsp; `HttpClientModule` &nbsp;to your Imports in&nbsp; `projects/test-yourLibraryname/src/app/app.module.ts`.
-- Add the following code to your `projects/test-yourLibraryname/src/app/app.component.ts`&nbsp;(see in code):
+## Configure webworker service
+
+- Add the following code lines to the `projects/atroposs-yourLibraryname-module/src/lib/services/webworker/webworker.service.ts`:
+
+  ```typescript
+  public run(
+    script: string, // <= Add this line
+    data: any,
+    onSuccess: (result: any) => any,
+    onError: any,
+    onProgress?: (status: any) => any
+  ): void {
+
+   [...]
+
+    // Start the worker
+    worker.postMessage({
+      ...data,
+      python: script, // <= Add this line
+    });
+  }
+
+  public async asyncRun(
+    script: string, // <= Add this line
+    data: any,
+    onProgress?: (status: any) => any
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.run(
+        script, // <= Add this line
+        [...]
+      );
+    });
+  }
   ```
-  import { Component } from '@angular/core';
-  import { HttpClient, HttpHeaders } from '@angular/common/http'; //<== ADD
-  import { WebworkerService } from './_services/webworker/webworker.service'; //<== ADD
-  import { Observable } from 'rxjs'; //<== ADD
-  import { AtropossYourLibrarynameService } from 'projects/atroposs-yourLibraryname/src/public-api'; //<== ADD
+
+## Dev: Test if it works :)
+
+- Add the following code to your `projects/test-yourLibraryname/src/app/app.component.ts`:
+
+  ```typescript
+  import { Component } from '@angular/core'
+  import { WebworkerService } from '../../../services'
 
   @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
   })
   export class AppComponent {
-    title = 'wasm-application';
+    title = 'wasm-application'
     //
     // ADD FROM HERE
     //
-    pyscsript: any;
+    private readonly SCRIPT_PATH: string = 'path/to/your/file.py' // <= path to python-file
 
-    constructor(private WebwServ: WebworkerService, private http: HttpClient) {}
+    constructor(private WebWorkerService: WebworkerService) {}
 
     async ngOnInit() {
-      const wasmServ = new AtropossYourLibrarynameService();
-      let pyCode = await fetch('assets/test.py').then((response) =>
-        response.text()
-      );
+      const { results, error }: any = await this.WebWorkerService.asyncRun(
+        await fetch(this.SCRIPT_PATH).then((response) => {
+          return response.text()
+        }),
+        { name: 'John Doe' },
+        (status: any) => {
+          console.log(status)
+        }
+      )
 
-      wasmServ.setWebworker((pyCode: string, data?: Object) => {
-        this.WebwServ.asyncRun(pyCode, data);
-      });
-      console.log('starting webworker');
-      wasmServ.startWebworker();
-    }
-
-    public getPythonFile(url: string): Observable<any> {
-      const headers = new HttpHeaders().set(
-        'Content-Type',
-        'text/plain; charset=utf-8'
-      );
-      return this.http.get(url, { headers, responseType: 'text' });
+      if (error) {
+        console.error('webworker error: ', error)
+      } else if (results) {
+        console.log('webworker results: ', results)
+      } else {
+        console.error('webworker error: ', 'No results or error')
+      }
     }
     //
     // TO HERE
@@ -263,26 +157,78 @@ This instructions explain how you can setup an angular project for Atroposs, whi
 
 <br>
 
-## Dev: Test if it works :)
-
-- Add a `test.py`-file to your assets-folder at `projects/atroposs-yourLibraryname/`.
+- Add a `test.py`-file to your assets-folder at `projects/atroposs-yourLibraryname-module/assets`.
 - Add the following code to the python-file:
-  ```
-  print('+----------------------------------------------------+')
-  print('| Python code execution from file works! Have fun :) |')
-  print('+----------------------------------------------------+')
+
+  ```python
+  from js import name
+  print('+----------------------------------------------------------------+')
+  print('| Python code execution from file works! Have fun ' + name +' :) |')
+  print('+----------------------------------------------------------------+')
   ```
 
-- Make sure you refer to this file in `projects/atroposs-yourLibraryname/src/lib/atroposs-yourLibraryname.service.ts`.
-<br/>There in line 5 you need to set the `SCRIPT_PATH`&nbsp; to `'asset-folder'/test.py`.
+- Make sure you refer to this file in `projects/atroposs-yourLibraryname-module/src/lib/atroposs-yourLibraryname-module.component.ts`.
+  <br/>There in line 14 you need to set the `SCRIPT_PATH`&nbsp; to `'asset-folder'/test.py`.
 
 > Note: The message will be displayed in the browser-console.
-
-## Integrate library in Atroposs application
-
-- For now ask [LersCode](https://github.com/LersCode) to do that. You can write him via [mail](mailto:lars.boss@prodyna.com).
 
 <br>
 <br>
 
 ### _This module is a extension of [this](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/how-to-build-atroposs-module.md) instructions_
+
+> IF you want to use the webassembly without a webworker, you have to do the following steps:
+
+1. Create a function, which loads the webassembly and executes it.
+
+```typescript
+const PYODIDE_URL: string = 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js'
+
+async function loadPyodideAndPackages() {
+  //@ts-ignore
+  self.pyodide = await self.loadPyodide()
+}
+
+async function runWasm(data) {
+  importScripts(PYODIDE_URL)
+
+  try {
+    await loadPyodideAndPackages()
+
+    const { python, ...context } = data
+
+    /**
+     * Makes key-value pairs of the received context available for this Worker's scope.
+     * This is important so that they can be imported into the Python file: `from js import [key]`
+     */
+    for (const key of Object.keys(context)) {
+      // @ts-ignore
+      self[key] = context[key]
+    }
+
+    try {
+      // @ts-ignore
+      await self.pyodide.loadPackagesFromImports(python)
+      // @ts-ignore
+      let results = await self.pyodide.runPythonAsync(python)
+      console.log('results', results)
+    } catch (error) {
+      console.error('error', error)
+    }
+  } catch (e) {
+    console.error('error', e)
+  }
+}
+```
+
+2. Call the function with the data you want to pass to the webassembly.
+
+```typescript
+runWasm({
+  python: `
+  from js import name    
+  print("Hello from Python to " + name )
+  `,
+  context: { name: 'John Doe' },
+})
+```
