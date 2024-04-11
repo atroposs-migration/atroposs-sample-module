@@ -181,7 +181,8 @@ $mat-primary: (
 $theme-primary: mat.define-palette($mat-primary, main, lighter, darker);
 
 body {
-  --accent-color: #3385cc;
+  //--accent-color: #3385cc;
+  --accent-color: #2375bc;
   --accent-lighter-color: #c2daf0;
   --accent-darker-color: #2068b9;
   --text-accent-color: #{$light-primary-text};
@@ -189,7 +190,8 @@ body {
   --text-accent-darker-color: #{$light-primary-text};
 }
 $mat-accent: (
-  main: #3385cc,
+  // main: #3385cc,
+  main: #2375bc,
   lighter: #c2daf0,
   darker: #2068b9,
   200: #3385cc,
@@ -199,7 +201,7 @@ $mat-accent: (
       main: $light-primary-text,
       lighter: $dark-primary-text,
       darker: $light-primary-text,
-    ),
+    )
 );
 $theme-accent: mat.define-palette($mat-accent, main, lighter, darker);
 
