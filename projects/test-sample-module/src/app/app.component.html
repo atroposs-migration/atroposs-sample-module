@@ -7,5 +7,32 @@
       This sidebar will be added when your module is added to the main app.
     </p>
   </div>
-  <div class="right"><router-outlet></router-outlet></div>
+  <div class="right">
+    <div id="module-header" *ngIf="(moduleInfo | keyvalue)?.length">
+      <!-- version of the module -->
+      <div id="module-header__title">
+        <div id="module-header__version">
+          <span>v{{ moduleInfo?.version }} </span>
+        </div>
+        <!-- You can add a small icon here if you want, otherwise delete the img -->
+        <img
+          height="30"
+          [src]="moduleInfo?.icon?.src"
+          [alt]="moduleInfo?.icon?.alt"
+        />
+        <h3>{{ moduleInfo?.name }}</h3>
+      </div>
+      <!-- Do NOT delete this div, even if it's empty -->
+      <div id="module-header__logos">
+        <!-- One or more logos to display -->
+        <img
+          *ngFor="let image of moduleInfo?.imagePaths"
+          [src]="image.src"
+          [alt]="image.alt"
+          height="60"
+        />
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
 </div>
