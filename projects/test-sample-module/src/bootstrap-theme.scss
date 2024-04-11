@@ -1,0 +1,58 @@
+/**
+ * colors
+ */
+$white: #ffffff;
+
+$theme-colors: (
+  'light': #fafafa,
+  'dark': #2c2c2c,
+  'primary': #2375bc,
+  'secondary': rgba(#000000, 0.87),
+  'info': #0dcaf0,
+  'success': #198754,
+  'warning': #ffc107,
+  'danger': #fb3838,
+);
+
+/**
+ * Typography
+ */
+// stylelint-disable value-keyword-case
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+  'Liberation Mono', 'Courier New', monospace;
+// stylelint-enable value-keyword-case
+/* $font-family-base: $font-family-sans-serif; */
+$font-family-base: 'Roboto Condensed', 'Helvetica Neue', sans-serif;
+$font-family-code: $font-family-monospace;
+
+// $font-size-root affects the value of `rem`, which is used for as well font sizes, paddings, and margins
+// $font-size-base affects the font size of the body text
+$font-size-root: 16px;
+$font-size-base: 1rem; // Assumes the browser default, typically `16px`
+$font-size-sm: $font-size-base * 0.875;
+$font-size-lg: $font-size-base * 1.25;
+
+$font-weight-lighter: lighter;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+$font-weight-bolder: bolder;
+
+$font-weight-base: $font-weight-normal;
+
+$line-height-base: 1.5;
+$line-height-sm: 1.25;
+$line-height-lg: 2;
+
+$h1-font-size: $font-size-base * 2.5;
+$h2-font-size: $font-size-base * 2;
+$h3-font-size: $font-size-base * 1.75;
+$h4-font-size: $font-size-base * 1.5;
+$h5-font-size: $font-size-base * 1.25;
+$h6-font-size: $font-size-base;
+
+/**
+ * imports
+ */
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
