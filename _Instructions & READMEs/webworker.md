@@ -226,3 +226,5 @@ export class AppComponent {
   }
 }
 ```
+
+### _This module is a extension of [this](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/how-to-build-atroposs-module.md) instructions_

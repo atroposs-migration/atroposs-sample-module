@@ -172,20 +172,28 @@ When you want to use a Material Component in your module, you can add the import
 
 > Info: The already existing component `test-theme-material` is just a test-component to show how to use Angular Material in your module. You can delete it.
 
+## Bootstrap
+
+You can use Bootstrap in your module. We have already added a theme file for ot, with as little as possible styles. <br>
+
+> Info: We strongly reccomend to use Angular Material, but if you want to use Bootstrap, you can do so.
+
 ## Routing
 
 When you want to use your own routing in your module, you can add it to the `lib-routing.module.ts` in the `atroposs-yourName-module/src/lib/modules`-folder. <br>
-We added an example there, so you can see how to do it. <br>
-The most important thing to know is, that all your routes need to include outlet `lib-outlet`. This is, so that we can show the individual header for your module with the version & name of your module, plus your logo. <br>
+We added an example there, so you can see how to do it. (See "children") <br>
 We will just add the root-route of your module in the main application, from then on, your routing will be executed. <br>
 
 > Note: Please populate your root-routing in the README.md of your module, so we know how to call your module. (eg: `spm-module`)
 
 ## Module header
 
-We recommmend to use the header, we provide, so that the atroposs modules are streamlined and look the same. <br>
-You can find the header in the `atroposs-yourName-module/src/lib/atroposs-yourName-module.component.ts`-file. <br>
+If you want to to make use of the module header (with version, name and logos), you need to populate the according data in your root module route path. Have a look at the `lib-routing.module.ts` in the `atroposs-yourName-module/src/lib/modules`-folder. <br>
+
+We recommmend to use the header, so that the atroposs modules are streamlined and look the same. <br>
 Your can add one or more logos, display the name and maybe an icon of the module. <br>
+
+> Note: This is not mandatory, it's more "nice to have" :)
 
 <br>
 <br>
