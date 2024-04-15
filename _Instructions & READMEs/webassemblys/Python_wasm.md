@@ -175,7 +175,7 @@ It's recommended to use a webworker to run the python code. This way the main th
 <br>
 <br>
 
-### _This module is a extension of [this](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/how-to-build-atroposs-module.md) instructions_
+## Webassembly without webworker
 
 > IF you want to use the webassembly without a webworker, you have to do the following steps:
 
@@ -232,3 +232,5 @@ runWasm({
   context: { name: 'John Doe' },
 })
 ```
+
+### _This module is a extension of [this](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/how-to-build-atroposs-module.md) instructions_

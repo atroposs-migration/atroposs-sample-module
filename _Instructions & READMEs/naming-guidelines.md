@@ -9,3 +9,5 @@ We recommend to name your project the same as the library. This way your git-rep
 ## 2️⃣ Library
 
 Please name your library as follows `atroposs-yourLibraryName-module`. The name of the library is later the name of the npm-package.
+
+### _This module is a extension of [this](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/how-to-build-atroposs-module.md) instructions_
