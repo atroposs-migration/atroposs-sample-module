@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 @Component({
   selector: 'atroposs-sample-module',
   template: `<p>atroposs-sample-module works!</p>
