@@ -40,7 +40,7 @@ This section is important for the Atroposs-Team to know what your package is nam
   "name": "atroposs-sample-module",
   "shortName": "spm-module",
   "rootRoute": "spm-module",
-  "companyImages": ["assets/images/logo.png"],
+  "companylogo": "assets/images/logo.png",
   "usesWebworker": "yes",
   "webworkerFilePath": "projects/atroposs-sample-module/assets/webworker/webworker.worker.ts",
   "usesWebassembly": "yes",
