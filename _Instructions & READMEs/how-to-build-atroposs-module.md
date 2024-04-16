@@ -195,6 +195,40 @@ Your can add one or more logos, display the name and maybe an icon of the module
 
 > Note: This is not mandatory, it's more "nice to have" :)
 
+## Storage
+
+If you want to share your module results with other modules or provide the results for a second run of your module, you can use the storage service. <br>
+You can add your keys to the enum in `atroposs-yourName-module/src/lib/interfaces/storage/storage.enum.ts` and use the storage service in your module. <br>
+
+```typescript
+// EXAMPLE in atrpopss-yourName-module.component.ts
+import { Component, OnInit } from '@angular/core';
+import { StorageService } from './services';
+import { StorageKeys } from './interfaces';
+
+@Component({
+  selector: 'atroposs-sample-module',
+  template: `<p>atroposs-sample-module works!</p>
+    <button mat-raised-button color="primary" routerLink="test-theme-material">Test Theme</button>`,
+  styles: [],
+})
+export class AtropossSampleModuleComponent implements OnInit {
+  constructor() {}
+
+  ngOnInit(): void {
+    this.parseResults();
+  }
+
+  parseResults(): void {
+    StorageService.set({
+      [StorageKeys.SPM_MODULE_RESULTS]: 'This could be your results, stringyfied.',
+    });
+    console.log(StorageService.get(StorageKeys.SPM_MODULE_RESULTS));
+    StorageService.remove(StorageKeys.SPM_MODULE_RESULTS);
+  }
+}
+```
+
 <br>
 <br>
 
@@ -207,3 +241,7 @@ If you need more help or something did not work out, try again (new clone of the
 - [Webworker](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/webworker.md)
 - [Python webassembly](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/webassemblys/Python_wasm.md)
 - [naming guidelines](https://github.com/PRODYNA/atroposs-sample-module/blob/main/_Instructions%20%26%20READMEs/naming-guidelines.md)
+
+```
+
+```

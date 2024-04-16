@@ -31,13 +31,14 @@ The module can be published to [npmjs.org](npmjs.org) and then be imported into 
 
 ## Package info
 
-> Please fill in the following information about your package (below are some examples):
+This section is important for the Atroposs-Team to know what your package is named, what is uses and what assets can/need to be linked.
+
+> Please fill in the following information about your package and put it in your package README-file (below are some examples):
 
 ```json
 {
   "name": "atroposs-sample-module",
   "shortName": "spm-module",
-  "version": "0.0.1",
   "rootRoute": "spm-module",
   "companyImages": ["assets/images/logo.png"],
   "usesWebworker": "yes",
