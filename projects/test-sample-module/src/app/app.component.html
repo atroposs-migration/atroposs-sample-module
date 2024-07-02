@@ -16,6 +16,7 @@
         </div>
         <!-- You can add a small icon here if you want, otherwise delete the img -->
         <img
+          *ngIf="moduleInfo?.icon"
           height="30"
           [src]="moduleInfo?.icon?.src"
           [alt]="moduleInfo?.icon?.alt"
@@ -25,14 +26,22 @@
       <!-- Do NOT delete this div, even if it's empty -->
       <div id="module-header__logos">
         <!-- One or more logos to display -->
-        <img
-          *ngFor="let image of moduleInfo?.imagePaths"
-          [src]="image.src"
-          [alt]="image.alt"
-          height="60"
-        />
+        <ng-container *ngFor="let image of moduleInfo?.imagePaths">
+          <a
+            *ngIf="image.link; else noLinkImage"
+            [href]="image.link"
+            target="_blank"
+          >
+            <img [src]="image.src" [alt]="image.alt" height="60"
+          /></a>
+          <ng-template #noLinkImage
+            ><img [src]="image.src" [alt]="image.alt" height="60"
+          /></ng-template>
+        </ng-container>
       </div>
     </div>
-    <router-outlet></router-outlet>
+    <div id="router-outlet">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
