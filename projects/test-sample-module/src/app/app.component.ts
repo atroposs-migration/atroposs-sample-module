@@ -31,7 +31,6 @@ export class AppComponent {
           this.route?.routeConfig?.path
       ) {
         this.route = event.state.root.firstChild;
-        console.log(this.route?.data);
         this.moduleInfo = (this.route?.data as ModuleInfo) || null;
       }
     });
